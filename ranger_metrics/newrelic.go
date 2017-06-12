@@ -3,21 +3,21 @@ package ranger_metrics
 import (
 	newrelic "github.com/newrelic/go-agent"
 	"net/http"
-	"fmt"
+	"github.com/fesposito/go-ranger/ranger_logger"
 )
 
 type NewRelic struct {
 	Application newrelic.Application
 }
 
-func NewNewRelic(appName string, license string) *NewRelic {
+func NewNewRelic(appName string, license string, logger ranger_logger.LoggerInterface) *NewRelic {
 	app, err := newrelic.NewApplication(newrelic.NewConfig(
 		appName,
 		license),
 	)
 
 	if err != nil {
-		panic(fmt.Errorf("NewRelic error: %s", err))
+		logger.Panic("NewRelic error", ranger_logger.LoggerData{"error": err.Error()})
 	}
 
 	return &NewRelic{

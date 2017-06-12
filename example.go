@@ -19,7 +19,7 @@ func init() {
 	// we recommend to use ranger_logger (logrus + logstash hook)
 	// if the connection fails we will warn and keep logging to stdout
 	logger = ranger_logger.NewLoggerWithLogstashHook("tcp", "localhost:1234", "exampleApp")
-	rangerMetrics = ranger_metrics.NewNewRelic("Your App Name", "<your-key-goes-here>....................")
+	rangerMetrics = ranger_metrics.NewNewRelic("Your App Name", "<your-key-goes-here>....................", logger)
 }
 
 func main() {
